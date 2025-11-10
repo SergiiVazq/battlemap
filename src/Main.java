@@ -16,42 +16,50 @@ public class Main {
         System.out.println(" columans : ");
         int columnas = entrada.nextInt();
 
-        String [][] campo = new String[filas][columnas];
+        String[][] campo = new String[filas][columnas];
         Random rand = new Random();
-        for (int i = 0 ;i<filas;i++){
-            for (int j=0;j<columnas;j++){
-                campo[i][j] = "." ;
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                campo[i][j] = ".";
             }
         }
-        campo[rand.nextInt(0,filas)][rand.nextInt(0,columnas)] = "J";
-        campo[rand.nextInt(0,filas)][rand.nextInt(0,columnas)] = "E";
+        campo[rand.nextInt(0, filas)][rand.nextInt(0, columnas)] = "J";
+        campo[rand.nextInt(0, filas)][rand.nextInt(0, columnas)] = "E";
 
-        actualizacion(vidaJ,vidaE,campo,filas,columnas);
-        String mientrada = entrada.next();
+        actualizacion(vidaJ, vidaE, campo, filas, columnas);
+        do {
+            boolean semueve= false;
 
-        char movimiento = mientrada.charAt(0);
-        while (movimiento!='w' && movimiento!='W' && movimiento!='S' && movimiento!='s' && movimiento!='A' && movimiento!='a' && movimiento!='D' && movimiento!='d'){
-            System.out.print("Error introduce un Valor valido de direccion: ");
-            mientrada = entrada.next();
-            movimiento = mientrada.charAt(0);
-        }
-        if (movimiento=='w' || movimiento =='W'){
-            movimientojugador(movimiento,campo,filas,columnas);
-            actualizacion(vidaJ,vidaE,campo,filas,columnas);
+            char movimiento = pedirmovimiento();
 
-        } else if (movimiento=='a' || movimiento=='A') {
-            movimientojugador(movimiento,campo,filas,columnas);
+            if (movimiento == 'w' || movimiento == 'W') {
+                semueve = movimientojugador(movimiento, campo, filas, columnas, semueve);
+                if (!semueve){
+                    break;
+                }
+                actualizacion(vidaJ, vidaE, campo, filas, columnas);
+            } else if (movimiento == 'a' || movimiento == 'A') {
+                semueve = movimientojugador(movimiento, campo, filas, columnas, semueve);
+                if (!semueve){
+                    break;
+                }
+                actualizacion(vidaJ, vidaE, campo, filas, columnas);
+            } else if (movimiento == 's' || movimiento == 'S') {
+                semueve = movimientojugador(movimiento, campo, filas, columnas, semueve);
+                if (!semueve){
+                    break;
+                }
+                actualizacion(vidaJ, vidaE, campo, filas, columnas);
+            } else {
+                semueve = movimientojugador(movimiento, campo, filas, columnas, semueve);
+                if (!semueve){
+                    break;
+                }
+                actualizacion(vidaJ, vidaE, campo, filas, columnas);
+            }
 
-        } else if (movimiento=='s' || movimiento=='S') {
-            movimientojugador(movimiento,campo,filas,columnas);
 
-
-        }else {
-            movimientojugador(movimiento,campo,filas,columnas);
-
-        }
-
-
+        }while (vidaE >0 || vidaJ >0);
     }
 
     public static void actualizacion(int x, int y, String [][] b,int filasmap, int columnasmap){
@@ -70,17 +78,90 @@ public class Main {
         System.out.print("\n J es tu posicion y E es el enemigo teclea W(NORTE), S(SUR), A(OESTE) o D(ESTE) para intentar atraparlo");
 
     }
-    public static void movimientojugador(char direccion, String [][] campodebatalla, int filasmp, int columnasmp){
+    public static char pedirmovimiento (){
+        Scanner mov = new Scanner(System.in);
+        System.out.print("\n MOVIMIENTO WASD : ");
+        String movimientomap = mov.nextLine();
+        char movmap = movimientomap.charAt(0);
+        while (movmap != 'w' && movmap != 'W' && movmap != 'S' && movmap != 's' && movmap != 'A' && movmap != 'a' && movmap != 'D' && movmap != 'd'){
+            System.out.print("Dato incorrecto introduce bien la direccion en la que quieres ir: ");
+            movimientomap = mov.nextLine();
+            movmap = movimientomap.charAt(0);
+        }
+        return movmap;
+    }
+    public static boolean movimientojugador(char direccion, String [][] campodebatalla, int filasmp, int columnasmp,boolean movimiento){
         if (direccion=='w' || direccion=='W'){
             for(int i = 0; i<filasmp;i++){
                 for(int j=0;j<columnasmp;j++)
                     if (campodebatalla[i][j]=="J"){
+                        if (i==0){
+                            System.out.print("El jugador no puede avanzar a esa posicion por que sandria fuera del mapa elije otra opcion");
+                            movimiento = false;
+                            break;
+
+                        }
                         campodebatalla[i-1][j] = "J";
                         campodebatalla[i][j] = ".";
+                        movimiento = true;
                         break;
                     }
             }
+        } else if (direccion=='s'|| direccion=='S') {
+            for (int i = 0; i<filasmp;i++){
+                for(int j=0;j<columnasmp;j++)
+                    if (campodebatalla[i][j]=="J"){
+                        if (i==filasmp){
+                            System.out.print("El jugador no puede avanzar a esa posicion por que sandria fuera del mapa elije otra opcion");
+                            movimiento = false;
+                            break;
+
+                        }
+                        campodebatalla[i+1][j] = "J";
+                        campodebatalla[i][j] = ".";
+                        movimiento = true;
+                        break;
+                    }
+            }
+
+        } else if (direccion == 'a' || direccion  == 'A') {
+            for (int i = 0; i<filasmp;i++){
+                for(int j=0;j<columnasmp;j++)
+                    if (campodebatalla[i][j]=="J"){
+                        if (j==0){
+                            System.out.print("El jugador no puede avanzar a esa posicion por que sandria fuera del mapa elije otra opcion");
+                            movimiento = false;
+                            break;
+
+                        }
+                        campodebatalla[i][j-1] = "J";
+                        campodebatalla[i][j] = ".";
+                        movimiento = true;
+                        break;
+                    }
+            }
+
+
+        } else if (direccion == 'd' || direccion== 'D') {
+            for (int i = 0; i<filasmp;i++){
+                for(int j=0;j<columnasmp;j++)
+                    if (campodebatalla[i][j]=="J"){
+                        if (j==columnasmp){
+                            System.out.print("El jugador no puede avanzar a esa posicion por que sandria fuera del mapa elije otra opcion");
+                            movimiento = false;
+                            break;
+
+                        }
+                        campodebatalla[i][j+1] = "J";
+                        campodebatalla[i][j] = ".";
+                        movimiento = true;
+                        break;
+                    }
+            }
+
+
         }
+        return movimiento;
 
     }
 
