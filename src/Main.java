@@ -34,28 +34,28 @@ public class Main {
 
             if (movimiento == 'w' || movimiento == 'W') {
                 semueve = movimientojugador(movimiento, campo, filas, columnas, semueve);
-                if (!semueve){
-                    break;
+                if (semueve){
+                    actualizacion(vidaJ, vidaE, campo, filas, columnas);
                 }
-                actualizacion(vidaJ, vidaE, campo, filas, columnas);
+
             } else if (movimiento == 'a' || movimiento == 'A') {
                 semueve = movimientojugador(movimiento, campo, filas, columnas, semueve);
-                if (!semueve){
-                    break;
+                if (semueve){
+                    actualizacion(vidaJ, vidaE, campo, filas, columnas);
                 }
-                actualizacion(vidaJ, vidaE, campo, filas, columnas);
+
             } else if (movimiento == 's' || movimiento == 'S') {
                 semueve = movimientojugador(movimiento, campo, filas, columnas, semueve);
-                if (!semueve){
-                    break;
+                if (semueve){
+                    actualizacion(vidaJ, vidaE, campo, filas, columnas);;
                 }
-                actualizacion(vidaJ, vidaE, campo, filas, columnas);
+
             } else {
                 semueve = movimientojugador(movimiento, campo, filas, columnas, semueve);
-                if (!semueve){
-                    break;
+                if (semueve){
+                    actualizacion(vidaJ, vidaE, campo, filas, columnas);;
                 }
-                actualizacion(vidaJ, vidaE, campo, filas, columnas);
+
             }
 
 
@@ -108,7 +108,7 @@ public class Main {
                     }
             }
         } else if (direccion=='s'|| direccion=='S') {
-            for (int i = 0; i<filasmp;i++){
+            for (int i = 0; i<filasmp-1;i++){
                 for(int j=0;j<columnasmp;j++)
                     if (campodebatalla[i][j]=="J"){
                         if (i==filasmp){
