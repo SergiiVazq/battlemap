@@ -9,7 +9,7 @@ public class Main {
         int vidaE = 3;
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Introduce cuantas filas y columnas tiene el campo de batalla");
+        System.out.println("Introduce cuantas filas y columnas tiene el campo de batalla");
         System.out.println("\n filas : ");
         Scanner entrada = new Scanner(System.in);
         int filas = entrada.nextInt();
@@ -94,13 +94,13 @@ public class Main {
         if (direccion=='w' || direccion=='W'){
             for(int i = 0; i<filasmp;i++){
                 for(int j=0;j<columnasmp;j++) {
-                    if (campodebatalla[i][j] == "J") {
+                    if (campodebatalla[i][j].equals("J")) {
                         if (i == 0) {
                             System.out.print("El jugador no puede avanzar a esa posicion por que sandria fuera del mapa elije otra opcion");
                             movimiento = false;
                             break;
 
-                        } else if (campodebatalla[i-1][j]== "E") {
+                        } else if (campodebatalla[i-1][j].equals("E")) {
                             System.out.print("El jugador no puede avanzar a esa posicion por que se encuentra el enemigo en ella");
                             break;
 
@@ -120,13 +120,13 @@ public class Main {
                     if(cambio){
                         break;
                     }
-                    if (campodebatalla[i][j] == "J") {
+                    if (campodebatalla[i][j].equals("J")) {
                         if (i == filasmp-1 ) {
                             System.out.print("El jugador no puede avanzar a esa posicion por que sandria fuera del mapa elije otra opcion");
                             movimiento = false;
                             break;
 
-                        }else if (campodebatalla[i+1][j]== "E"){
+                        }else if (campodebatalla[i+1][j].equals("E")){
                             System.out.print("El jugador no puede avanzar a esa posicion por que se encuentra el enemigo en ella");
                             break;
                         } else {
@@ -146,13 +146,13 @@ public class Main {
         } else if (direccion == 'a' || direccion  == 'A') {
             for (int i = 0; i<filasmp;i++){
                 for(int j=0;j<columnasmp;j++){
-                    if (campodebatalla[i][j]=="J"){
+                    if (campodebatalla[i][j].equals("J")){
                         if (j==0){
                             System.out.print("El jugador no puede avanzar a esa posicion por que sandria fuera del mapa elije otra opcion");
                             movimiento = false;
                             break;
 
-                        } else if (campodebatalla[i][j-1] == "E"){
+                        } else if (campodebatalla[i][j-1].equals("E")){
                             System.out.print("El jugador no puede avanzar a esa posicion por que se encuentra el enemigo en ella");
                             break;
                         }
@@ -168,13 +168,13 @@ public class Main {
         } else if (direccion == 'd' || direccion== 'D') {
             for (int i = 0; i<filasmp;i++){
                 for(int j=0;j<columnasmp;j++) {
-                    if (campodebatalla[i][j] == "J") {
+                    if (campodebatalla[i][j].equals("J")) {
                         if (j == columnasmp - 1) {
                             System.out.print("El jugador no puede avanzar a esa posicion por que sandria fuera del mapa elije otra opcion");
                             movimiento = false;
                             break;
 
-                        } else if (campodebatalla[i][j+1]== "E") {
+                        } else if (campodebatalla[i][j+1].equals("E")) {
                             System.out.print("El jugador no puede avanzar a esa posicion por que se encuentra el enemigo en ella");
                             break;
 
@@ -194,6 +194,15 @@ public class Main {
     }
 
 }
+//
+
+
+
+
+
+
+
+
 /*// muestra el mapa actual
         for (int i = 0 ;i<filas;i++){
             System.out.print("\n|");
