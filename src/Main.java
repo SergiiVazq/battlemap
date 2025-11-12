@@ -37,47 +37,19 @@ public class Main {
             switch (opcion){
                 case 1 :
                     char movimiento = pedirmovimiento();
-                    if (movimiento == 'w' || movimiento == 'W') {
-                        semueve = movimientojugador(movimiento, campo, filas, columnas, semueve);
-                        if (semueve){
-                            actualizacion(vidaJ, vidaE, campo, filas, columnas);
-                        } else {
-                            showmap(campo,filas,columnas);
-                        }
-
-                    } else if (movimiento == 'a' || movimiento == 'A') {
-                        semueve = movimientojugador(movimiento, campo, filas, columnas, semueve);
-                        if (semueve){
-                            actualizacion(vidaJ, vidaE, campo, filas, columnas);
-                        }else {
-                            showmap(campo,filas,columnas);
-                        }
-
-                    } else if (movimiento == 's' || movimiento == 'S') {
-                        semueve = movimientojugador(movimiento, campo, filas, columnas, semueve);
-                        if (semueve){
-                            actualizacion(vidaJ, vidaE, campo, filas, columnas);;
-                        }else {
-                            showmap(campo,filas,columnas);
-                        }
-
+                    semueve = movimientojugador(movimiento, campo, filas, columnas, semueve);
+                    if (semueve){
+                        actualizacion(vidaJ, vidaE, campo, filas, columnas);
                     } else {
-                        semueve = movimientojugador(movimiento, campo, filas, columnas, semueve);
-                        if (semueve){
-                            actualizacion(vidaJ, vidaE, campo, filas, columnas);;
-                        }else{
-                            showmap(campo,filas,columnas);
-                        }
-
+                        showmap(campo,filas,columnas);
                     }
+
                     break;
                 case 2 :
                     System.out.print("\n En que direccion quieres disparar? (wasd):");
                     char disparo = pedirdisparo();
-
-
-
-
+                    char direcdisparo = pedirdisparo();
+                    
                     break;
             }
 
@@ -256,6 +228,10 @@ public class Main {
             }
         }
 
+    }
+    public static boolean hacerdisparo(){
+        boolean acierto = false;
+        return acierto;
     }
 
 }
