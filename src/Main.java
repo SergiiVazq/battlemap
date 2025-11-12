@@ -33,6 +33,7 @@ public class Main {
             int opcion = menushort();
 
 
+
             switch (opcion){
                 case 1 :
                     char movimiento = pedirmovimiento();
@@ -40,24 +41,32 @@ public class Main {
                         semueve = movimientojugador(movimiento, campo, filas, columnas, semueve);
                         if (semueve){
                             actualizacion(vidaJ, vidaE, campo, filas, columnas);
+                        } else {
+                            showmap(campo,filas,columnas);
                         }
 
                     } else if (movimiento == 'a' || movimiento == 'A') {
                         semueve = movimientojugador(movimiento, campo, filas, columnas, semueve);
                         if (semueve){
                             actualizacion(vidaJ, vidaE, campo, filas, columnas);
+                        }else {
+                            showmap(campo,filas,columnas);
                         }
 
                     } else if (movimiento == 's' || movimiento == 'S') {
                         semueve = movimientojugador(movimiento, campo, filas, columnas, semueve);
                         if (semueve){
                             actualizacion(vidaJ, vidaE, campo, filas, columnas);;
+                        }else {
+                            showmap(campo,filas,columnas);
                         }
 
                     } else {
                         semueve = movimientojugador(movimiento, campo, filas, columnas, semueve);
                         if (semueve){
                             actualizacion(vidaJ, vidaE, campo, filas, columnas);;
+                        }else{
+                            showmap(campo,filas,columnas);
                         }
 
                     }
@@ -65,7 +74,7 @@ public class Main {
                 case 2 :
                     System.out.print("\n En que direccion quieres disparar? (wasd):");
                     char disparo = pedirdisparo();
-                    
+
 
 
 
@@ -75,7 +84,7 @@ public class Main {
 
 
 
-        }while (vidaE >0 || vidaJ >0);
+        }while (vidaE >0 && vidaJ >0);
     }
 
     public static void actualizacion(int x, int y, String [][] b,int filasmap, int columnasmap){
@@ -235,6 +244,18 @@ public class Main {
             disparo = movimientomap.charAt(0);
         }
         return disparo;
+    }
+    public static void showmap(String[][]map, int filasmap , int columnasmap){
+        for (int i = 0 ;i<filasmap;i++){
+            System.out.print("\n|");
+            for (int j=0;j<columnasmap;j++){
+                System.out.print(map[i][j] + " ");
+                if((j+1)==columnasmap){
+                    System.out.print("|");
+                }
+            }
+        }
+
     }
 
 }
