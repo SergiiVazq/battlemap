@@ -1,5 +1,7 @@
+import javax.swing.plaf.ActionMapUIResource;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.random.RandomGenerator;
 
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -8,6 +10,8 @@ public class Main {
     public static void main(String[] args) {
         int vidaJ = 3;
         int vidaE = 3;
+        boolean acierto = false;
+
 
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
@@ -31,7 +35,9 @@ public class Main {
         actualizacion(vidaJ, vidaE, campo, filas, columnas);
         do {
             boolean semueve= false;
+
             int opcion = Funciones.menushort();
+
 
 
 
@@ -50,6 +56,26 @@ public class Main {
                     System.out.print("\n En que direccion quieres disparar? (wasd):");
 
                     char direcdisparo = Funciones.pedirdisparo();
+                    acierto = Funciones.hacerdisparo(campo, filas , columnas ,direcdisparo);
+                    if (acierto){
+
+                        int prob = 0;
+                        prob =rand.nextInt(0,100)+1;
+                        if (prob<80){
+                            vidaE --;
+                            System.out.print("ACERTASTE le queda una vida menos a tu enemigo\n");
+                            System.out.print("\n ======================\n");
+                            actualizacion(vidaJ, vidaE, campo, filas, columnas);
+                        }else {
+                            System.out.print("TIENES UNA PUNTERIA NEFASTA Y FALLAS...\n");
+                            System.out.print("\n ======================\n");
+                            actualizacion(vidaJ, vidaE, campo, filas, columnas);
+
+                        }
+                    }else {
+                        actualizacion(vidaJ, vidaE, campo, filas, columnas);
+                    }
+
 
                     break;
             }

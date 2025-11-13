@@ -139,8 +139,99 @@ public class Funciones {
         }
         return movmap;
     }
-    public static boolean hacerdisparo(){
+    public static boolean hacerdisparo(String[][]campodebatalla, int filasmp , int columnasmp ,char direccion){
         boolean acierto = false;
+        if (direccion=='w' || direccion=='W'){
+            for(int i = 0; i<filasmp;i++){
+                for(int j=0;j<columnasmp;j++) {
+                    if (campodebatalla[i][j].equals("J")) {
+                        if (i == 0) {
+                            System.out.print("DISPARASTE A LA NADA PIERDES TURNO");
+                            acierto = false;
+                            break;
+
+                        } else if (campodebatalla[i-1][j].equals("E")) {
+                            System.out.print("Disparas al jugador y ...");
+                            acierto = true;
+                            break;
+
+                        }else {
+                            System.out.print("Disparaste a una posicion donde no se encontraba el enemigo \n");
+                            acierto= false;
+                        }
+                    }
+                }
+            }
+        }else if (direccion=='s'|| direccion=='S') {
+            for (int i = 0; i<filasmp;i++){
+                for(int j=0;j<columnasmp;j++) {
+                    if (campodebatalla[i][j].equals("J")) {
+                        if (i == filasmp-1 ) {
+                            System.out.print("DISPARASTE A LA NADA PIERDES TURNO");
+                            acierto = false;
+                            break;
+
+                        }else if (campodebatalla[i+1][j].equals("E")){
+                            System.out.print("Disparas al jugador y ...");
+                            acierto = true;
+                            break;
+
+                        } else {
+                            System.out.print("Disparaste a una posicion donde no se encontraba el enemigo \n");
+                            acierto= false;
+                        }
+
+
+                    }
+
+                }
+            }
+
+        } else if (direccion == 'a' || direccion  == 'A') {
+            for (int i = 0; i<filasmp;i++){
+                for(int j=0;j<columnasmp;j++){
+                    if (campodebatalla[i][j].equals("J")){
+                        if (j==0){
+                            System.out.print("DISPARASTE A LA NADA PIERDES TURNO");
+                            acierto = false;
+                            break;
+
+                        } else if (campodebatalla[i][j-1].equals("E")){
+                            System.out.print("Disparas al jugador y ...");
+                            acierto = true;
+                            break;
+                        }
+                        System.out.print("Disparaste a una posicion donde no se encontraba el enemigo \n");
+                        acierto= false;
+                    }
+                }
+            }
+
+
+        } else if (direccion == 'd' || direccion== 'D') {
+            for (int i = 0; i<filasmp;i++){
+                for(int j=0;j<columnasmp;j++) {
+                    if (campodebatalla[i][j].equals("J")) {
+                        if (j == columnasmp - 1) {
+                            System.out.print("DISPARASTE A LA NADA PIERDES TURNO");
+                            acierto = false;
+                            break;
+                        } else if (campodebatalla[i][j+1].equals("E")) {
+                            System.out.print("Disparas al jugador y ...");
+                            acierto = true;
+                            break;
+
+                        }
+                        System.out.print("Disparaste a una posicion donde no se encontraba el enemigo \n");
+                        acierto= false;
+                    }
+                }
+            }
+
+
+        }
+
+
         return acierto;
     }
     public static int menushort(){
