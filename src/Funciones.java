@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Funciones {
@@ -163,6 +164,7 @@ public class Funciones {
                 }
             }
         }else if (direccion=='s'|| direccion=='S') {
+
             for (int i = 0; i<filasmp;i++){
                 for(int j=0;j<columnasmp;j++) {
                     if (campodebatalla[i][j].equals("J")) {
@@ -247,6 +249,105 @@ public class Funciones {
 
         }
         return opcion;
+    }
+    public static String [][] movimientoenemigo(String[][]map, int filasmap , int columnasmap){
+        Random  mov = new Random();
+        int movimientoE = mov.nextInt(0,4);
+        if (movimientoE==1){
+            for(int i = 0; i<filasmap;i++){
+                for(int j=0;j<columnasmap;j++) {
+                    if (map[i][j].equals("E")) {
+                        if (i == 0) {
+
+
+                            break;
+
+                        } else if (map[i-1][j].equals("J")) {
+
+                            break;
+
+                        }
+                        map[i - 1][j] = "E";
+                        map[i][j] = ".";
+
+                        break;
+                    }
+                }
+            }
+        } else if (movimientoE==2) {
+
+            boolean cambio = false;
+            for (int i = 0; i<filasmap;i++){
+                for(int j=0;j<columnasmap;j++) {
+
+                    if(cambio){
+                        break;
+                    }
+                    if (map[i][j].equals("E")) {
+                        if (i == filasmap-1 ) {
+
+
+                            break;
+
+                        }else if (map[i+1][j].equals("J")){
+
+                            break;
+                        } else {
+                            map[i+1][j] = "E";
+                            map[i][j] = ".";
+                            cambio=true;
+
+                            break;
+                        }
+
+
+                    }
+
+                }
+            }
+
+        } else if (movimientoE==3) {
+            for (int i = 0; i<filasmap;i++){
+                for(int j=0;j<columnasmap;j++){
+                    if (map[i][j].equals("E")){
+                        if (j==0){
+
+                            break;
+
+                        } else if (map[i][j-1].equals("J")){
+                            break;
+                        }
+                        map[i][j-1] = "E";
+                        map[i][j] = ".";
+
+                        break;
+                    }
+                }
+            }
+
+
+        } else if (movimientoE==4) {
+            for (int i = 0; i<filasmap;i++){
+                for(int j=0;j<columnasmap;j++) {
+                    if (map[i][j].equals("E")) {
+                        if (j == columnasmap - 1) {
+
+                            break;
+
+                        } else if (map[i][j+1].equals("J")) {
+                            break;
+
+                        }
+                        map[i][j + 1] = "E";
+                        map[i][j] = ".";
+                        break;
+                    }
+                }
+            }
+
+
+        }
+        return map;
     }
 
 

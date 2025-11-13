@@ -46,7 +46,9 @@ public class Main {
                     char movimiento = Funciones.pedirmovimiento();
                     semueve = Funciones.movimientojugador(movimiento, campo, filas, columnas, semueve);
                     if (semueve){
+                        campo = Funciones.movimientoenemigo(campo,filas,columnas);
                         actualizacion(vidaJ, vidaE, campo, filas, columnas);
+
                     } else {
                         Funciones.showmap(campo,filas,columnas);
                     }
@@ -56,6 +58,7 @@ public class Main {
                     System.out.print("\n En que direccion quieres disparar? (wasd):");
 
                     char direcdisparo = Funciones.pedirdisparo();
+                    campo = Funciones.movimientoenemigo(campo,filas,columnas);
                     acierto = Funciones.hacerdisparo(campo, filas , columnas ,direcdisparo);
                     if (acierto){
 
@@ -65,14 +68,17 @@ public class Main {
                             vidaE --;
                             System.out.print("ACERTASTE le queda una vida menos a tu enemigo\n");
                             System.out.print("\n ======================\n");
+
                             actualizacion(vidaJ, vidaE, campo, filas, columnas);
                         }else {
                             System.out.print("TIENES UNA PUNTERIA NEFASTA Y FALLAS...\n");
                             System.out.print("\n ======================\n");
+
                             actualizacion(vidaJ, vidaE, campo, filas, columnas);
 
                         }
                     }else {
+
                         actualizacion(vidaJ, vidaE, campo, filas, columnas);
                     }
 
