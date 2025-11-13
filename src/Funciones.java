@@ -14,6 +14,24 @@ public class Funciones {
         }
 
     }
+    public static void actualizacion(int x, int y, String [][] b,int filasmap, int columnasmap){
+        // muestra el mapa actual
+        for (int i = 0 ;i<filasmap;i++){
+            System.out.print("\n|");
+            for (int j=0;j<columnasmap;j++){
+                System.out.print(b[i][j] + " ");
+                if((j+1)==columnasmap){
+                    System.out.print("|");
+                }
+            }
+        }
+        System.out.print("\n ======================\n");
+        System.out.print( "\nVIDA DE J ==> " + x);
+        System.out.print("\nVIDA DE ENEMIGO ==> "+y);
+        System.out.print("\n J es tu posicion y E es el enemigo teclea W(NORTE), S(SUR), A(OESTE) o D(ESTE) para intentar atraparlo o dispara\n");
+
+
+    }
     public static char pedirdisparo (){
         Scanner mov = new Scanner(System.in);
         System.out.print("\n DISPARO WASD : ");
@@ -269,6 +287,7 @@ public class Funciones {
                         }
                         map[i - 1][j] = "E";
                         map[i][j] = ".";
+
 
                         break;
                     }

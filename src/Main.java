@@ -21,6 +21,8 @@ public class Main {
         int filas = entrada.nextInt();
         System.out.println(" columans : ");
         int columnas = entrada.nextInt();
+        System.out.println(" cuantos enemigos hay ? :");
+        int enemigos = entrada.nextInt();
 
         String[][] campo = new String[filas][columnas];
         Random rand = new Random();
@@ -30,24 +32,28 @@ public class Main {
             }
         }
         campo[rand.nextInt(0, filas)][rand.nextInt(0, columnas)] = "J";
-        campo[rand.nextInt(0, filas)][rand.nextInt(0, columnas)] = "E";
+        for (int i = 0; i<enemigos;i++){
+            campo[rand.nextInt(0, filas)][rand.nextInt(0, columnas)] = "E";
+        }
 
-        actualizacion(vidaJ, vidaE, campo, filas, columnas);
+    //muestra mapa y vidas y lo que puedes hacer
+        Funciones.actualizacion(vidaJ, vidaE, campo, filas, columnas);
         do {
             boolean semueve= false;
-
+            //disparar o moverse
             int opcion = Funciones.menushort();
 
 
 
 
             switch (opcion){
+                //movimiento jugador y enemigo
                 case 1 :
                     char movimiento = Funciones.pedirmovimiento();
                     semueve = Funciones.movimientojugador(movimiento, campo, filas, columnas, semueve);
                     if (semueve){
                         campo = Funciones.movimientoenemigo(campo,filas,columnas);
-                        actualizacion(vidaJ, vidaE, campo, filas, columnas);
+                        Funciones.actualizacion(vidaJ, vidaE, campo, filas, columnas);
 
                     } else {
                         Funciones.showmap(campo,filas,columnas);
@@ -55,6 +61,7 @@ public class Main {
 
                     break;
                 case 2 :
+                    //disparo y movimiento enemigo
                     System.out.print("\n En que direccion quieres disparar? (wasd):");
 
                     char direcdisparo = Funciones.pedirdisparo();
@@ -69,17 +76,17 @@ public class Main {
                             System.out.print("ACERTASTE le queda una vida menos a tu enemigo\n");
                             System.out.print("\n ======================\n");
 
-                            actualizacion(vidaJ, vidaE, campo, filas, columnas);
+                            Funciones.actualizacion(vidaJ, vidaE, campo, filas, columnas);
                         }else {
                             System.out.print("TIENES UNA PUNTERIA NEFASTA Y FALLAS...\n");
                             System.out.print("\n ======================\n");
 
-                            actualizacion(vidaJ, vidaE, campo, filas, columnas);
+                            Funciones.actualizacion(vidaJ, vidaE, campo, filas, columnas);
 
                         }
                     }else {
 
-                        actualizacion(vidaJ, vidaE, campo, filas, columnas);
+                        Funciones.actualizacion(vidaJ, vidaE, campo, filas, columnas);
                     }
 
 
@@ -92,24 +99,7 @@ public class Main {
         }while (vidaE >0 && vidaJ >0);
     }
 
-    public static void actualizacion(int x, int y, String [][] b,int filasmap, int columnasmap){
-        // muestra el mapa actual
-        for (int i = 0 ;i<filasmap;i++){
-            System.out.print("\n|");
-            for (int j=0;j<columnasmap;j++){
-                System.out.print(b[i][j] + " ");
-                if((j+1)==columnasmap){
-                    System.out.print("|");
-                }
-            }
-        }
-        System.out.print("\n ======================\n");
-        System.out.print( "\nVIDA DE J ==> " + x);
-        System.out.print("\nVIDA DE ENEMIGO ==> "+y);
-        System.out.print("\n J es tu posicion y E es el enemigo teclea W(NORTE), S(SUR), A(OESTE) o D(ESTE) para intentar atraparlo o dispara\n");
 
-
-    }
 
 }
 //
