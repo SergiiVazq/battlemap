@@ -2,33 +2,25 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Funciones {
-    public static void showmap(String[][]map, int filasmap , int columnasmap){
-        for (int i = 0 ;i<filasmap;i++){
+    public static void showmap(String[][]map){
+        for (int i = 0 ;i<map.length;i++){
             System.out.print("\n|");
-            for (int j=0;j<columnasmap;j++){
+            for (int j=0;j<map[0].length;j++){
                 System.out.print(map[i][j] + " ");
-                if((j+1)==columnasmap){
+                if((j+1)==map[0].length){
                     System.out.print("|");
                 }
             }
         }
 
     }
-    public static void actualizacion(int x, int y, String [][] b,int filasmap, int columnasmap){
-        // muestra el mapa actual
-        for (int i = 0 ;i<filasmap;i++){
-            System.out.print("\n|");
-            for (int j=0;j<columnasmap;j++){
-                System.out.print(b[i][j] + " ");
-                if((j+1)==columnasmap){
-                    System.out.print("|");
-                }
-            }
-        }
+    public static void actualizacion(int x, int y, String [][] b){
+        // muestra el mapa actual + vida
+        showmap(b);
         System.out.print("\n ======================\n");
         System.out.print( "\nVIDA DE J ==> " + x);
         System.out.print("\nVIDA DE ENEMIGO ==> "+y);
-        System.out.print("\n J es tu posicion y E es el enemigo teclea W(NORTE), S(SUR), A(OESTE) o D(ESTE) para intentar atraparlo o dispara\n");
+
 
 
     }
@@ -44,10 +36,10 @@ public class Funciones {
         }
         return disparo;
     }
-    public static boolean movimientojugador(char direccion, String [][] campodebatalla, int filasmp, int columnasmp,boolean movimiento){
+    public static boolean movimientojugador(char direccion, String [][] campodebatalla,boolean movimiento){
         if (direccion=='w' || direccion=='W'){
-            for(int i = 0; i<filasmp;i++){
-                for(int j=0;j<columnasmp;j++) {
+            for(int i = 0; i<campodebatalla.length;i++){
+                for(int j=0;j<campodebatalla[0].length;j++) {
                     if (campodebatalla[i][j].equals("J")) {
                         if (i == 0) {
                             System.out.print("El jugador no puede avanzar a esa posicion por que sandria fuera del mapa elije otra opcion");
@@ -68,14 +60,14 @@ public class Funciones {
             }
         } else if (direccion=='s'|| direccion=='S') {
             boolean cambio = false;
-            for (int i = 0; i<filasmp;i++){
-                for(int j=0;j<columnasmp;j++) {
+            for (int i = 0; i< campodebatalla.length;i++){
+                for(int j=0;j< campodebatalla[0].length;j++) {
 
                     if(cambio){
                         break;
                     }
                     if (campodebatalla[i][j].equals("J")) {
-                        if (i == filasmp-1 ) {
+                        if (i == campodebatalla.length-1 ) {
                             System.out.print("El jugador no puede avanzar a esa posicion por que sandria fuera del mapa elije otra opcion");
                             movimiento = false;
                             break;
@@ -98,8 +90,8 @@ public class Funciones {
             }
 
         } else if (direccion == 'a' || direccion  == 'A') {
-            for (int i = 0; i<filasmp;i++){
-                for(int j=0;j<columnasmp;j++){
+            for (int i = 0; i<campodebatalla.length;i++){
+                for(int j=0;j<campodebatalla[0].length;j++){
                     if (campodebatalla[i][j].equals("J")){
                         if (j==0){
                             System.out.print("El jugador no puede avanzar a esa posicion por que sandria fuera del mapa elije otra opcion");
@@ -120,10 +112,10 @@ public class Funciones {
 
 
         } else if (direccion == 'd' || direccion== 'D') {
-            for (int i = 0; i<filasmp;i++){
-                for(int j=0;j<columnasmp;j++) {
+            for (int i = 0; i<campodebatalla.length;i++){
+                for(int j=0;j<campodebatalla[0].length;j++) {
                     if (campodebatalla[i][j].equals("J")) {
-                        if (j == columnasmp - 1) {
+                        if (j == campodebatalla[0].length - 1) {
                             System.out.print("El jugador no puede avanzar a esa posicion por que sandria fuera del mapa elije otra opcion");
                             movimiento = false;
                             break;
@@ -158,11 +150,11 @@ public class Funciones {
         }
         return movmap;
     }
-    public static boolean hacerdisparo(String[][]campodebatalla, int filasmp , int columnasmp ,char direccion){
+    public static boolean hacerdisparo(String[][]campodebatalla,char direccion){
         boolean acierto = false;
         if (direccion=='w' || direccion=='W'){
-            for(int i = 0; i<filasmp;i++){
-                for(int j=0;j<columnasmp;j++) {
+            for(int i = 0; i< campodebatalla.length;i++){
+                for(int j=0;j<campodebatalla[0].length;j++) {
                     if (campodebatalla[i][j].equals("J")) {
                         if (i == 0) {
                             System.out.print("DISPARASTE A LA NADA PIERDES TURNO");
@@ -183,10 +175,10 @@ public class Funciones {
             }
         }else if (direccion=='s'|| direccion=='S') {
 
-            for (int i = 0; i<filasmp;i++){
-                for(int j=0;j<columnasmp;j++) {
+            for (int i = 0; i< campodebatalla.length;i++){
+                for(int j=0;j<campodebatalla[0].length;j++) {
                     if (campodebatalla[i][j].equals("J")) {
-                        if (i == filasmp-1 ) {
+                        if (i == campodebatalla.length-1 ) {
                             System.out.print("DISPARASTE A LA NADA PIERDES TURNO");
                             acierto = false;
                             break;
@@ -208,8 +200,8 @@ public class Funciones {
             }
 
         } else if (direccion == 'a' || direccion  == 'A') {
-            for (int i = 0; i<filasmp;i++){
-                for(int j=0;j<columnasmp;j++){
+            for (int i = 0; i< campodebatalla.length;i++){
+                for(int j=0;j< campodebatalla[0].length;j++){
                     if (campodebatalla[i][j].equals("J")){
                         if (j==0){
                             System.out.print("DISPARASTE A LA NADA PIERDES TURNO");
@@ -229,10 +221,10 @@ public class Funciones {
 
 
         } else if (direccion == 'd' || direccion== 'D') {
-            for (int i = 0; i<filasmp;i++){
-                for(int j=0;j<columnasmp;j++) {
+            for (int i = 0; i<campodebatalla.length;i++){
+                for(int j=0;j< campodebatalla[0].length;j++) {
                     if (campodebatalla[i][j].equals("J")) {
-                        if (j == columnasmp - 1) {
+                        if (j == campodebatalla[0].length - 1) {
                             System.out.print("DISPARASTE A LA NADA PIERDES TURNO");
                             acierto = false;
                             break;
@@ -268,12 +260,12 @@ public class Funciones {
         }
         return opcion;
     }
-    public static String [][] movimientoenemigo(String[][]map, int filasmap , int columnasmap){
+    public static String [][] movimientoenemigo(String[][]map){
         Random  mov = new Random();
         int movimientoE = mov.nextInt(0,4);
         if (movimientoE==1){
-            for(int i = 0; i<filasmap;i++){
-                for(int j=0;j<columnasmap;j++) {
+            for(int i = 0; i< map.length;i++){
+                for(int j=0;j< map[0].length;j++) {
                     if (map[i][j].equals("E")) {
                         if (i == 0) {
 
@@ -296,14 +288,14 @@ public class Funciones {
         } else if (movimientoE==2) {
 
             boolean cambio = false;
-            for (int i = 0; i<filasmap;i++){
-                for(int j=0;j<columnasmap;j++) {
+            for (int i = 0; i< map.length;i++){
+                for(int j=0;j< map[0].length;j++) {
 
                     if(cambio){
                         break;
                     }
                     if (map[i][j].equals("E")) {
-                        if (i == filasmap-1 ) {
+                        if (i == map.length-1 ) {
 
 
                             break;
@@ -326,8 +318,8 @@ public class Funciones {
             }
 
         } else if (movimientoE==3) {
-            for (int i = 0; i<filasmap;i++){
-                for(int j=0;j<columnasmap;j++){
+            for (int i = 0; i< map.length;i++){
+                for(int j=0;j< map[0].length;j++){
                     if (map[i][j].equals("E")){
                         if (j==0){
 
@@ -346,10 +338,10 @@ public class Funciones {
 
 
         } else if (movimientoE==4) {
-            for (int i = 0; i<filasmap;i++){
-                for(int j=0;j<columnasmap;j++) {
+            for (int i = 0; i< map.length;i++){
+                for(int j=0;j< map[0].length;j++) {
                     if (map[i][j].equals("E")) {
-                        if (j == columnasmap - 1) {
+                        if (j == map[0].length - 1) {
 
                             break;
 

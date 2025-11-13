@@ -38,15 +38,24 @@ public class Main {
             }
         }
         campo[rand.nextInt(0, filas)][rand.nextInt(0, columnas)] = "J";
+        //enemigos
         for (int i = 0; i<enemigos;i++){
-            campo[rand.nextInt(0, filas)][rand.nextInt(0, columnas)] = "E";
+            int x = 0;
+            int y = 0;
+            do {
+
+                x = rand.nextInt(0, filas);
+                y = rand.nextInt(0, columnas);
+            }while (!campo[x][y].equals("."));
+            campo[x][y] = "E";
+
         }
 
-    //muestra mapa y vidas y lo que puedes hacer
-        Funciones.actualizacion(vidaJ, vidaE, campo, filas, columnas);
+    //muestra mapa y vidas
+        Funciones.actualizacion(vidaJ, vidaE, campo);
         do {
             boolean semueve= false;
-            //disparar o moverse
+            //Muestra menu disparar o moverse
             int opcion = Funciones.menushort();
 
 
@@ -56,13 +65,13 @@ public class Main {
                 //movimiento jugador y enemigo
                 case 1 :
                     char movimiento = Funciones.pedirmovimiento();
-                    semueve = Funciones.movimientojugador(movimiento, campo, filas, columnas, semueve);
+                    semueve = Funciones.movimientojugador(movimiento, campo, semueve);
                     if (semueve){
-                        campo = Funciones.movimientoenemigo(campo,filas,columnas);
-                        Funciones.actualizacion(vidaJ, vidaE, campo, filas, columnas);
+                        campo = Funciones.movimientoenemigo(campo);
+                        Funciones.actualizacion(vidaJ, vidaE, campo);
 
                     } else {
-                        Funciones.showmap(campo,filas,columnas);
+                        Funciones.showmap(campo);
                     }
 
                     break;
@@ -71,28 +80,28 @@ public class Main {
                     System.out.print("\n En que direccion quieres disparar? (wasd):");
 
                     char direcdisparo = Funciones.pedirdisparo();
-                    campo = Funciones.movimientoenemigo(campo,filas,columnas);
-                    acierto = Funciones.hacerdisparo(campo, filas , columnas ,direcdisparo);
+                    campo = Funciones.movimientoenemigo(campo);
+                    acierto = Funciones.hacerdisparo(campo,direcdisparo);
                     if (acierto){
 
-                        int prob = 0;
-                        prob =rand.nextInt(0,100)+1;
+
+                        int prob =rand.nextInt(0,100)+1;
                         if (prob<80){
                             vidaE --;
                             System.out.print("ACERTASTE le queda una vida menos a tu enemigo\n");
                             System.out.print("\n ======================\n");
 
-                            Funciones.actualizacion(vidaJ, vidaE, campo, filas, columnas);
+                            Funciones.actualizacion(vidaJ, vidaE, campo);
                         }else {
                             System.out.print("TIENES UNA PUNTERIA NEFASTA Y FALLAS...\n");
                             System.out.print("\n ======================\n");
 
-                            Funciones.actualizacion(vidaJ, vidaE, campo, filas, columnas);
+                            Funciones.actualizacion(vidaJ, vidaE, campo);
 
                         }
                     }else {
 
-                        Funciones.actualizacion(vidaJ, vidaE, campo, filas, columnas);
+                        Funciones.actualizacion(vidaJ, vidaE, campo);
                     }
 
 
