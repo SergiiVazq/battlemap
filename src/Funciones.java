@@ -43,11 +43,13 @@ public class Funciones {
                     if (campodebatalla[i][j].equals("J")) {
                         if (i == 0) {
                             System.out.print("El jugador no puede avanzar a esa posicion por que sandria fuera del mapa elije otra opcion");
+                            System.out.print("\n ======================\n");
                             movimiento = false;
                             break;
 
                         } else if (campodebatalla[i-1][j].equals("E")) {
                             System.out.print("El jugador no puede avanzar a esa posicion por que se encuentra el enemigo en ella");
+                            System.out.print("\n ======================\n");
                             break;
 
                         }
@@ -69,11 +71,14 @@ public class Funciones {
                     if (campodebatalla[i][j].equals("J")) {
                         if (i == campodebatalla.length-1 ) {
                             System.out.print("El jugador no puede avanzar a esa posicion por que sandria fuera del mapa elije otra opcion");
+                            System.out.print("\n ======================\n");
                             movimiento = false;
+
                             break;
 
                         }else if (campodebatalla[i+1][j].equals("E")){
                             System.out.print("El jugador no puede avanzar a esa posicion por que se encuentra el enemigo en ella");
+                            System.out.print("\n ======================\n");
                             break;
                         } else {
                             campodebatalla[i+1][j] = "J";
@@ -95,11 +100,13 @@ public class Funciones {
                     if (campodebatalla[i][j].equals("J")){
                         if (j==0){
                             System.out.print("El jugador no puede avanzar a esa posicion por que sandria fuera del mapa elije otra opcion");
+                            System.out.print("\n ======================\n");
                             movimiento = false;
                             break;
 
                         } else if (campodebatalla[i][j-1].equals("E")){
                             System.out.print("El jugador no puede avanzar a esa posicion por que se encuentra el enemigo en ella");
+                            System.out.print("\n ======================\n");
                             break;
                         }
                         campodebatalla[i][j-1] = "J";
