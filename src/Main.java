@@ -66,6 +66,7 @@ public class Main {
                 case 1 :
                     char movimiento = Funciones.pedirmovimiento();
                     semueve = Funciones.movimientojugador(movimiento, campo, semueve);
+                    vidaJ= Funciones.enemigodispara(campo, vidaJ);
                     if (semueve){
                         campo = Funciones.movimientoenemigo(campo);
                         Funciones.actualizacion(vidaJ, vidaE, campo);
@@ -81,7 +82,9 @@ public class Main {
 
                     char direcdisparo = Funciones.pedirdisparo();
                     campo = Funciones.movimientoenemigo(campo);
+                    vidaJ = Funciones.enemigodispara(campo,vidaJ);
                     acierto = Funciones.hacerdisparo(campo,direcdisparo);
+
                     if (acierto){
 
 
@@ -112,6 +115,11 @@ public class Main {
 
 
         }while (vidaE >0 && vidaJ >0);
+        if(vidaE==0){
+            System.out.println("\n\nGANASTE EL JUEGO FELICIDADES !!!");
+        }else{
+            System.out.println("\n\nPERDISTE EL JUEGO BUENA SUERTE LA PRÓXIMA VEZ!!!");
+        }
     }
 
 
